@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Resume | Sakshi Saratkar</title>
+  <meta name="description" content="Resume of Sakshi Saratkar, UI/UX designer with a background in architecture and interior design." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../case-studies/back-link.css" />
+  <link rel="stylesheet" href="../case-studies/case-study.css" />
+  <style>
+    :root { --cs-bg: #ffffff; --cs-ink: #141414; --cs-accent: #1f7a3c; --cs-muted: #55524d; --cs-display: 'DM Sans', Arial, Helvetica, sans-serif; --cs-body: 'DM Sans', Arial, Helvetica, sans-serif; }
+
+    .cv-head {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 28px;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 128px 24px 40px;
+    }
+
+    .cv-head .cs-gallery-head { padding: 0; }
+
+    .cv-head .cs-gallery-head p { margin-top: 14px; }
+
+    .cv-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+
+    .cv-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      height: 50px;
+      padding: 0 26px;
+      border: 1.5px solid #141414;
+      border-radius: 999px;
+      color: #141414;
+      font-size: 15px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+    }
+
+    .cv-btn.solid { background: #141414; color: #fff; }
+    .cv-btn:hover, .cv-btn:focus-visible { background: var(--cs-accent); border-color: var(--cs-accent); color: #fff; }
+    .cv-btn:focus-visible { outline: 2px solid var(--cs-accent); outline-offset: 3px; }
+
+    .cv-sheet {
+      border-top: 1px solid rgba(20, 20, 20, 0.08);
+      background: #f6f6f4;
+    }
+
+    .cv-pages {
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 48px 24px 96px;
+    }
+
+    .cv-page {
+      position: relative;
+      overflow: hidden;
+      border-radius: 10px;
+      background: #fff;
+      box-shadow: 0 12px 40px rgba(20, 20, 20, 0.1);
+    }
+
+    .cv-page canvas { display: block; width: 100%; height: 100%; }
+
+    .cv-fallback { margin: 0; color: var(--cs-muted); font-size: 15px; text-align: center; }
+
+    @media (max-width: 800px) {
+      .cv-head { padding: 88px 16px 28px; }
+      .cv-pages { gap: 16px; padding: 24px 12px 64px; }
+    }
+  </style>
+</head>
+<body>
+  <a class="cs-back" href="../index.html#resume"><svg viewBox="0 0 16 10" aria-hidden="true"><path d="M15 5H2M6 1L2 5l4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Back to portfolio</a>
+  <main>
+    <section class="cv-head">
+      <header class="cs-gallery-head">
+        <p class="cs-eyebrow">Resume</p>
+        <h1>Sakshi <span>Saratkar</span></h1>
+        <p>UI/UX Designer | Product Design | Visual Design</p>
+      </header>
+      <div class="cv-actions">
+        <a class="cv-btn solid" href="sakshi-saratkar-cv.pdf" download>Download PDF</a>
+        <a class="cv-btn" href="sakshi-saratkar-cv.pdf" target="_blank" rel="noopener">Open full screen</a>
+      </div>
+    </section>
+
+    <section class="cv-sheet" aria-label="Resume pages">
+      <div class="cv-pages" data-pdf="sakshi-saratkar-cv.pdf">
+        <noscript><p class="cv-fallback"><a href="sakshi-saratkar-cv.pdf">Open the resume PDF</a></p></noscript>
+      </div>
+    </section>
+  </main>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+  <script>
+    (() => {
+      const holder = document.querySelector(".cv-pages");
+      const url = holder.dataset.pdf;
+      const fail = () => {
+        holder.innerHTML = '<p class="cv-fallback"><a href="' + url + '">Open the resume PDF</a></p>';
+      };
+      if (!window.pdfjsLib) { fail(); return; }
+      pdfjsLib.GlobalWorkerOptions.workerSrc = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
+
+      pdfjsLib.getDocument(url).promise.then(async (pdf) => {
+        const ratio = Math.min(window.devicePixelRatio || 1, 2);
+        for (let n = 1; n <= pdf.numPages; n++) {
+          const page = await pdf.getPage(n);
+          const base = page.getViewport({ scale: 1 });
+          const slot = document.createElement("div");
+          slot.className = "cv-page";
+          slot.style.aspectRatio = base.width + " / " + base.height;
+          slot.setAttribute("role", "img");
+          slot.setAttribute("aria-label", "Resume, page " + n + " of " + pdf.numPages);
+          holder.appendChild(slot);
+          const viewport = page.getViewport({ scale: (slot.clientWidth * ratio) / base.width });
+          const canvas = document.createElement("canvas");
+          canvas.width = Math.round(viewport.width);
+          canvas.height = Math.round(viewport.height);
+          await page.render({ canvasContext: canvas.getContext("2d"), viewport }).promise;
+          slot.appendChild(canvas);
+        }
+      }).catch(fail);
+    })();
+  </script>
+</body>
+</html>

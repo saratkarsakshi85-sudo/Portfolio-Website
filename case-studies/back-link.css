@@ -1,0 +1,68 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,500;9..40,600&display=swap");
+
+.cs-back {
+  position: fixed;
+  top: 16px;
+  left: 16px;
+  z-index: 1000;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  height: 48px;
+  padding: 0 22px 0 16px;
+  border-radius: 999px;
+  background: #141414;
+  color: #fff;
+  font-family: "DM Sans", Arial, Helvetica, sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: normal;
+  text-decoration: none;
+  white-space: nowrap;
+  box-shadow: inset 0 0 0 5px #141414, inset 0 0 0 6px rgba(255, 255, 255, 0.18);
+  filter: drop-shadow(1.5px 0 0 #fff) drop-shadow(-1.5px 0 0 #fff) drop-shadow(0 1.5px 0 #fff) drop-shadow(0 -1.5px 0 #fff);
+  transition: color 0.2s ease;
+}
+
+.cs-back--bottom {
+  top: auto;
+  bottom: 16px;
+}
+
+.cs-back svg {
+  width: 16px;
+  height: 10px;
+  flex: none;
+  transition: transform 0.2s ease;
+}
+
+.cs-back:hover,
+.cs-back:focus-visible {
+  color: #c6f531;
+}
+
+.cs-back:hover svg,
+.cs-back:focus-visible svg {
+  transform: translateX(-3px);
+}
+
+.cs-back:focus-visible {
+  outline: 2px solid #c6f531;
+  outline-offset: 3px;
+}
+
+@media (max-width: 800px) {
+  .cs-back {
+    top: 10px;
+    left: 10px;
+    height: 42px;
+    padding: 0 16px 0 13px;
+    font-size: 13.5px;
+  }
+
+  .cs-back--bottom {
+    top: auto;
+    bottom: 10px;
+  }
+}

@@ -1,0 +1,239 @@
+html,
+body.research-body {
+  height: auto;
+  overflow: auto;
+}
+
+.research-body {
+  background: var(--white);
+  color: var(--black);
+  font-family: Content, var(--font);
+}
+
+.research-page {
+  max-width: 1667px;
+  margin: 0 auto;
+  padding: 40px 40px 80px;
+}
+
+.research-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 40px;
+}
+
+.research-nav .btn {
+  font-size: 20px;
+}
+
+.nav-links {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.research-section {
+  margin-bottom: 72px;
+}
+
+.research-section h1,
+.research-section h2 {
+  margin: 0 0 8px;
+  font-size: 25px;
+  line-height: 35px;
+  font-weight: 700;
+}
+
+.lede,
+.note,
+.research-section p,
+.research-section li {
+  font-size: 25px;
+  line-height: 35px;
+  margin: 0;
+  font-weight: 400;
+}
+
+.kajaria-copy p,
+.research-section.kajaria p,
+.research-section.kajaria li,
+.table-like,
+.trend-copy,
+.caption {
+  font-size: 20px;
+  line-height: 35px;
+}
+
+.photo-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 12px;
+  margin: 24px 0 32px;
+}
+
+.photo {
+  display: block;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.photo-crop {
+  overflow: hidden;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.photo-crop img {
+  display: block;
+  object-fit: cover;
+}
+
+.data-table {
+  width: 100%;
+  border: 1px solid #000;
+  border-collapse: collapse;
+  margin: 24px 0;
+  font-size: 20px;
+  line-height: 35px;
+}
+
+.data-table th,
+.data-table td {
+  border: 1px solid #000;
+  padding: 10px;
+  vertical-align: top;
+  text-align: left;
+  font-weight: 400;
+}
+
+.data-table th {
+  font-weight: 700;
+}
+
+.trend-row {
+  display: grid;
+  grid-template-columns: 186px 90px minmax(240px, 1fr) minmax(280px, 646px);
+  gap: 10px 16px;
+  align-items: start;
+  padding: 16px 0;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.trend-row strong {
+  font-weight: 700;
+}
+
+.pct {
+  font-weight: 700;
+}
+
+.takeaways,
+.depot,
+.conclusion {
+  font-size: 20px;
+  line-height: 35px;
+}
+
+.takeaways h2,
+.depot h2,
+.conclusion h2 {
+  font-size: 20px;
+}
+
+.takeaways ol,
+.depot ul,
+.conclusion ul {
+  margin: 8px 0 16px;
+  padding-left: 30px;
+}
+
+.store-intro .note {
+  margin-bottom: 4px;
+}
+
+.obs {
+  max-width: 1465px;
+}
+
+.obs ul {
+  margin: 8px 0 0;
+  padding-left: 38px;
+}
+
+.obs li {
+  margin-bottom: 0;
+}
+
+.prompt {
+  margin: 16px 0 12px;
+  font-size: 25px;
+  line-height: 35px;
+}
+
+.prompt b {
+  font-weight: 700;
+}
+
+.trend-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px 20px;
+  margin-top: 24px;
+}
+
+.trend-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+/* second row images differ by a few pixels at source, so pin them to one
+   height and let the widths follow, keeping the captions on a single line */
+.trend-card:nth-child(n + 4) .photo {
+  height: 559px;
+  width: auto;
+}
+
+.trend-card p {
+  font-size: 20px;
+  line-height: 35px;
+  margin-top: 12px;
+  max-width: 463px;
+}
+
+.conclusion-layout {
+  display: grid;
+  /* 440px is the width of the widest collage pair (213 + 12 + 204), so the
+     eight images wrap into four rows of two instead of breaking mid-pair */
+  grid-template-columns: minmax(0, 969px) 440px;
+  gap: 32px;
+  align-items: start;
+}
+
+.collage {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+@media (max-width: 1100px) {
+  .trend-row,
+  .trend-grid,
+  .conclusion-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .photo,
+  .photo-crop {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .photo {
+    width: auto;
+    max-height: 520px;
+  }
+}
